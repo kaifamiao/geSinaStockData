@@ -260,10 +260,10 @@ class SinaData:
 
         return stock_dict
 
-    def GetSinaData_pd(self,ts_code):
-        dict =self.GetSinaData(ts_code)
-        # print("dict\n", dict)
-        return pd.DataFrame([dict])
+    # def GetSinaData_pd(self,ts_code):
+    #     dict =self.GetSinaData(ts_code)
+    #     # print("dict\n", dict)
+    #     return pd.DataFrame([dict])
 
     def outlog(self,text1="",text2="",text3=""):
         currentDate = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())

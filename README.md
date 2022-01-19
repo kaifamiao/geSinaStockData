@@ -17,6 +17,9 @@ https://hq.sinajs.cn/list=sz002085
 ```angular2html
 var hq_str_sz002085="万丰奥威,5.520,5.540,5.540,5.570,5.510,5.540,5.550,10225636,56559527.340,56400,5.540,46040,5.530,147500,5.520,337250,5.510,531500,5.500,298800,5.550,219400,5.560,282100,5.570,204700,5.580,207200,5.590,2022-01-19,15:00:03,00";
 ```
+
+
+
 3. 使用python pandas
 
 #### 使用说明
@@ -38,6 +41,20 @@ import pandas as pd
 **getlist**
 >获取股票列表数据
 
+列表数据说明
+```angular2html
+        for list in codelist:
+            if list[0]=="0":
+                lsit_str.append("sz"+list)
+            if list[0]=="6":
+                lsit_str.append("sh"+list)
+            if list[0]=="8":
+                lsit_str.append("bj"+list)
+            if list[0]=="3":
+                lsit_str.append("sz"+list)
+            if list[0]=="4":
+                lsit_str.append("bj"+list)
+```
 
 3. 程序运行
 
@@ -49,7 +66,22 @@ if __name__ == '__main__':
     sn.get_data()
 ````
 
-4. 工具函数
+4. 生成日志工具
+
+```angular2html
+    def outlog(self,text1="",text2="",text3=""):
+        currentDate = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        # print(text1,text2,text3)
+        fo = open("log.txt", "a")
+        logs=""
+        # logs="========================="+currentDate +"=========================\n"
+        logs+=text1+text2+text3 +"\n"
+        fo  .writelines(logs)
+        fo.close()
+
+```
+
+5. 工具函数，主要用于显示颜色
 ````angular2html
 
 #-*-coding:gb2312-*-
