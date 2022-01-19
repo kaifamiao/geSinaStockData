@@ -6,7 +6,7 @@ geSinaStockData
 #### 软件架构
 软件架构说明
 
-
+![img_2.png](img_2.png)
 #### 安装教程
 
 1. 设置股票列表文件
@@ -94,6 +94,83 @@ def set_title():
     fo.close()
     return strtmp
 ````
+
+
+#### 重要算法
+https://hq.sinajs.cn/list=参数
+参数最大长度大概是800+，列表数据大概4700+，需要将将循环成6次，4700/800，次循环
+![img_1.png](img_1.png)
+
+```angular2html
+step = 800
+        total_count = len(list)
+
+        # step = 4
+        # total_count = 8 #len(list)
+
+
+        if total_count % step ==0:
+            kkkk = total_count / step
+            print("整除kkkk:=", kkkk)
+        else:
+            kkkk = total_count / step+1
+            print("未整除kkkk:=", kkkk)
+
+        kkkk =int(kkkk)
+
+        # 总循环次数：6
+        # 0x := 0y := 800
+        # 1x := 800y := 1600
+        # 2x := 1600y := 2400
+        # 3x := 2400y := 3200
+        # 4x := 3200y := 4000
+        # 5x := 4000y := 4800
+        printinfo("总循环次数：" + str(kkkk), "RED")
+        printinfo("总记录total_count：" + str(total_count), "RED")
+
+        tmp=0
+        y=step
+        #////循环开始///////////////////////////////////////////////////////////////////////////////////////////////////
+        for i in  range(kkkk):
+            codelist_final = ""
+            if i % 2==0:
+                COLORS = "MAGENTA"
+            else:
+                COLORS = "BLUE"
+            x=tmp
+            if i==kkkk-1:
+                y=total_count
+            else:
+                y=step*(i+1)
+            # print("["+str(i)+"]", "=============================================================", "x:=", x, "y:=", y)
+            tmpxxx="["+str(i)+"]=================================================第（"+str(i+1)+"）次循环【x:="+ str(x)+ "\ty:="+ str(y) +"】============================================================="
+            printinfo(tmpxxx,COLORS)
+            self.outlog(tmpxxx)
+            tmp =y
+
+            for z in range(x,y):
+                # printinfo(str(z),COLORS)
+                if z<y-1:
+                    codelist_final+=list[z]+","
+                else:
+                    codelist_final += list[z]
+
+            self.outlog(codelist_final)
+            # print(codelist_final)
+
+            df = self.GetSinaALLData(codelist_final)
+            # print("*" * 50, "GET print DF", "*" * 50)
+            # print(df)
+            print("i=",i)
+            if i==0:
+                ser =pd.concat([df,])
+            else:
+                ser=pd.concat([df,ser])
+
+        # ////循环结束///////////////////////////////////////////////////////////////////////////////////////////////////
+        print(Fore.RED+"=" * 50, Fore.RED+Back.YELLOW+Style.BRIGHT+"循环获取结束", Fore.RED+"=" * 50)
+        print(ser)
+```
 #### 参与贡献
 
 1. Fork 本仓库
