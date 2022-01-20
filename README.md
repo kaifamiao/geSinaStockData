@@ -6,7 +6,7 @@ geSinaStockData
 #### 软件架构
 软件架构说明
 
-![img_2.png](img_2.png)
+![img_2.png](img_2.png )
 #### 安装教程
 
 1. 设置股票列表文件
