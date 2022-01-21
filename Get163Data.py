@@ -1,4 +1,6 @@
 import urllib.request,time
+import pandas as pd
+pd.set_option('display.expand_frame_repr', False)
 
 def get_page(url):  #获取页面数据
     req=urllib.request.Request(url,headers={
@@ -55,3 +57,23 @@ def get_index_history_byNetease(index_temp):
 
 data = get_index_history_byNetease('sz001234')
 print(data)
+
+#////////////////////////////////////////get_daily////////////////////////////////////////////////////////////////////////////
+
+
+
+# 沪市前面加0，深市前面加1，比如0000001，是上证指数，1000001是中国平安
+def get_daily(code, start='19900101', end=''):
+    url_mod = "http://quotes.money.163.com/service/chddata.html?code=%s&start=%s&end=%s"
+    url = url_mod % (code, start, end)
+    df = pd.read_csv(url, encoding='gb2312')
+    return df
+
+
+df = get_daily('0000001')  # 获取上证指数
+
+print(df)
+
+df = get_daily('1000002')  # 获取上证指数
+
+print(df)
